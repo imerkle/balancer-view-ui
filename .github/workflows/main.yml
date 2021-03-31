@@ -4,6 +4,7 @@ on: push
 env:
   repo: balancer-view
   yaml: ui.yaml
+  container_name: ui
 jobs:
   docker-build:
     runs-on: ubuntu-latest
@@ -33,7 +34,7 @@ jobs:
         uses: loveholidays/gitops-action-yaml-updater@v1.0
         with:
           mode: IMAGE_TAG
-          container-name: go-server
+          container-name: ${{ env.container_name }}
           new-image-tag: ${{ github.sha }}
           filepath: ${{ env.repo }}/k8s/${{ env.yaml }}
 
